@@ -10,4 +10,10 @@ public interface BookService {
 
 	Book save(Book book);
 
+	Book updateBook(Book book);
+
+	void deleteBook(String isbn);
+
+	Book findBook(String isbn);
+
 }

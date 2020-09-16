@@ -1,6 +1,5 @@
 package com.moontea.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moontea.entity.Book;
 import com.moontea.service.BookService;
 
@@ -25,6 +25,9 @@ public class BookController {
 
 	@Autowired
 	private BookService bookService;
+
+	@Autowired
+	private ObjectMapper objectMapper;
 
 	@Value("${book.web.html}")
 	private String website;
@@ -79,6 +82,7 @@ public class BookController {
 	}
 
 	/**
+	 * 新增一本書
 	 * 
 	 * @return
 	 */
@@ -91,6 +95,42 @@ public class BookController {
 		book.setBookName(bookName);
 		book.setPublish(publish);
 		return bookService.save(book);
+	}
+
+	/**
+	 * 獲得一本書的資訊
+	 * 
+	 * @param isbn
+	 * @return
+	 */
+	@PostMapping("/findBook")
+	public Book findBook(@RequestParam String isbn) {
+		return bookService.findBook(isbn);
+	}
+
+	/**
+	 * 更新一本書的資訊
+	 * 
+	 * @param isbn
+	 * @param author
+	 * @param bookName
+	 * @param publish
+	 * @return
+	 */
+	@PostMapping("/updateBook")
+	public Book updateBook(@RequestParam String isbn, @RequestParam String author, @RequestParam String bookName,
+			@RequestParam String publish) {
+		Book book = new Book();
+		book.setIsbn(isbn);
+		book.setAuthor(author);
+		book.setBookName(bookName);
+		book.setPublish(publish);
+		return bookService.updateBook(book);
+	}
+	
+	@PostMapping("/deleteBook")
+	public void deleteBook(@RequestParam String isbn) {
+		bookService.deleteBook(isbn);
 	}
 
 }

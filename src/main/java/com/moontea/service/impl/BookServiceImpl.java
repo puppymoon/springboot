@@ -1,6 +1,7 @@
 package com.moontea.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +21,29 @@ public class BookServiceImpl implements BookService {
 		return bookRepository.findAll();
 	}
 
-	public Book save(Book save) {
-		return bookRepository.save(save);
+	@Override
+	public Book save(Book book) {
+		return bookRepository.save(book);
+	}
+
+	@Override
+	public Book findBook(String isbn) {
+		Book book = null;
+		Optional<Book> opBook = bookRepository.findById(isbn);
+		if (opBook.isPresent()) {
+			book = opBook.get();
+		}
+		return book;
+	}
+
+	@Override
+	public Book updateBook(Book book) {
+		return bookRepository.save(book);
+	}
+
+	@Override
+	public void deleteBook(String isbn) {
+		bookRepository.deleteById(isbn);
 	}
 
 }
