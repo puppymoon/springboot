@@ -15,17 +15,19 @@ public interface BookService {
 	void deleteBook(String isbn);
 
 	Book findBook(String isbn);
-	
+
 	List<Book> findByAuthor(String author);
-	
+
 	List<Book> findByAuthorAndBookName(String author, String bookName);
-	
+
 	List<Book> findByBookNameContains(String bookName);
-	
+
 	List<Book> findByBookNameLength(int length);
-	
+
 	int updateBookNameByIsbn(String bookName, String isbn);
-	
+
 	int deleteBookNameByIsbn(String isbn);
+
+	int deleteAndUpdate(String isbn, String bookName, String isbn2);
 
 }

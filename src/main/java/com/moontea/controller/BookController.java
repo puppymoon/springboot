@@ -164,10 +164,28 @@ public class BookController {
 	public int updateBookNameByIsbn(@RequestParam String bookName, @RequestParam String isbn) {
 		return bookService.updateBookNameByIsbn(bookName, isbn);
 	}
-	
+
+	/**
+	 * 刪除指定isbn書
+	 * 
+	 * @param isbn
+	 * @return
+	 */
 	@PostMapping("/deleteBookNameByIsbn")
 	public int deleteBookNameByIsbn(@RequestParam String isbn) {
 		return bookService.deleteBookNameByIsbn(isbn);
+	}
+
+	/**
+	 * 測試交易
+	 * 
+	 * @param isbn
+	 * @param bookName
+	 * @return
+	 */
+	@PostMapping("/deleteAndUpdate")
+	public int deleteAndUpdate(@RequestParam String isbn, @RequestParam String bookName, @RequestParam String isbn2) {
+		return bookService.deleteAndUpdate(isbn, bookName, isbn2);
 	}
 
 	/**

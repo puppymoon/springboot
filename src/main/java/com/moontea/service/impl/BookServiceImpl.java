@@ -79,4 +79,16 @@ public class BookServiceImpl implements BookService {
 		return bookRepository.deleteBookNameByIsbn(isbn);
 	}
 
+	@Override
+	@Transactional
+	public int deleteAndUpdate(String isbn, String bookName, String isbn2) {
+
+		int delCount = bookRepository.deleteBookNameByIsbn(isbn);
+
+		int updateCount = bookRepository.updateBookNameByIsbn(bookName, isbn2);
+
+		return delCount + updateCount;
+
+	}
+
 }
