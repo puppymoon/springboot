@@ -2,6 +2,8 @@ package com.moontea.repo;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,8 +30,16 @@ public interface BookRepository extends JpaRepository<Book, String> {
 //	@Query(value = "select * from book where length(BOOK_NAME) > ?1", nativeQuery = true)
 //	List<Book> findByBookNameLength(int length);
 
+	@Transactional
 	@Modifying
 	@Query("update Book b set b.bookName = ?1 where ISBN = ?2")
 	int updateBookNameByIsbn(String bookName, String isbn);
+	
+	@Transactional
+	@Modifying
+	@Query("delete from Book b where b.isbn = ?1")
+	int deleteBookNameByIsbn(String isbn);
+	
+	
 
 }

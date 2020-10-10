@@ -164,6 +164,11 @@ public class BookController {
 	public int updateBookNameByIsbn(@RequestParam String bookName, @RequestParam String isbn) {
 		return bookService.updateBookNameByIsbn(bookName, isbn);
 	}
+	
+	@PostMapping("/deleteBookNameByIsbn")
+	public int deleteBookNameByIsbn(@RequestParam String isbn) {
+		return bookService.deleteBookNameByIsbn(isbn);
+	}
 
 	/**
 	 * 更新一本書的資訊

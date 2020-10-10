@@ -25,5 +25,7 @@ public interface BookService {
 	List<Book> findByBookNameLength(int length);
 	
 	int updateBookNameByIsbn(String bookName, String isbn);
+	
+	int deleteBookNameByIsbn(String isbn);
 
 }

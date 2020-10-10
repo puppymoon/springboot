@@ -74,4 +74,9 @@ public class BookServiceImpl implements BookService {
 		return bookRepository.updateBookNameByIsbn(bookName, isbn);
 	}
 
+	@Override
+	public int deleteBookNameByIsbn(String isbn) {
+		return bookRepository.deleteBookNameByIsbn(isbn);
+	}
+
 }
