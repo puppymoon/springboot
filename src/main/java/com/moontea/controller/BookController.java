@@ -119,6 +119,11 @@ public class BookController {
 		return bookService.findByAuthor(author);
 	}
 
+	@PostMapping("/findByAuthorAndBookName")
+	public List<Book> findByAuthorAndBookName(@RequestParam String author, @RequestParam String bookName) {
+		return bookService.findByAuthorAndBookName(author, bookName);
+	}
+
 	/**
 	 * 更新一本書的資訊
 	 * 

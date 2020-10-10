@@ -17,5 +17,7 @@ public interface BookService {
 	Book findBook(String isbn);
 	
 	List<Book> findByAuthor(String author);
+	
+	List<Book> findByAuthorAndBookName(String author, String bookName);
 
 }
