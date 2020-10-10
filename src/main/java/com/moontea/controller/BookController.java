@@ -141,10 +141,28 @@ public class BookController {
 	public List<Book> findByBookNameContains(@RequestParam String bookName) {
 		return bookService.findByBookNameContains(bookName);
 	}
-	
+
+	/**
+	 * 以書名長度查詢
+	 * 
+	 * @param length
+	 * @return
+	 */
 	@PostMapping("/findByBookNameLength")
 	public List<Book> findByBookNameLength(@RequestParam int length) {
 		return bookService.findByBookNameLength(length);
+	}
+
+	/**
+	 * 更新指定isbn的書名
+	 * 
+	 * @param bookName
+	 * @param isbn
+	 * @return
+	 */
+	@PostMapping("/updateBookNameByIsbn")
+	public int updateBookNameByIsbn(@RequestParam String bookName, @RequestParam String isbn) {
+		return bookService.updateBookNameByIsbn(bookName, isbn);
 	}
 
 	/**

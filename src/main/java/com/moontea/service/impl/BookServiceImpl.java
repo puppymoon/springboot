@@ -3,6 +3,8 @@ package com.moontea.service.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,6 +66,12 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public List<Book> findByBookNameLength(int length) {
 		return bookRepository.findByBookNameLength(length);
+	}
+
+	@Override
+	@Transactional
+	public int updateBookNameByIsbn(String bookName, String isbn) {
+		return bookRepository.updateBookNameByIsbn(bookName, isbn);
 	}
 
 }
