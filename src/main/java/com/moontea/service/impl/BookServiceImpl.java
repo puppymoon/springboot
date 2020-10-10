@@ -61,4 +61,9 @@ public class BookServiceImpl implements BookService {
 		return bookRepository.findByBookNameContains(bookName);
 	}
 
+	@Override
+	public List<Book> findByBookNameLength(int length) {
+		return bookRepository.findByBookNameLength(length);
+	}
+
 }
