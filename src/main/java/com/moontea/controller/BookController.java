@@ -119,9 +119,27 @@ public class BookController {
 		return bookService.findByAuthor(author);
 	}
 
+	/**
+	 * 同時以作者名與書名找尋
+	 * 
+	 * @param author
+	 * @param bookName
+	 * @return
+	 */
 	@PostMapping("/findByAuthorAndBookName")
 	public List<Book> findByAuthorAndBookName(@RequestParam String author, @RequestParam String bookName) {
 		return bookService.findByAuthorAndBookName(author, bookName);
+	}
+
+	/**
+	 * 查找書名有包含...的
+	 * 
+	 * @param bookName
+	 * @return
+	 */
+	@PostMapping("/findByBookNameContains")
+	public List<Book> findByBookNameContains(@RequestParam String bookName) {
+		return bookService.findByBookNameContains(bookName);
 	}
 
 	/**

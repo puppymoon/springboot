@@ -19,5 +19,7 @@ public interface BookService {
 	List<Book> findByAuthor(String author);
 	
 	List<Book> findByAuthorAndBookName(String author, String bookName);
+	
+	List<Book> findByBookNameContains(String bookName);
 
 }
