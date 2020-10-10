@@ -109,6 +109,17 @@ public class BookController {
 	}
 
 	/**
+	 * 找到特定作者的書
+	 * 
+	 * @param author
+	 * @return
+	 */
+	@PostMapping("/findAuthor")
+	public List<Book> findAuthor(@RequestParam String author) {
+		return bookService.findByAuthor(author);
+	}
+
+	/**
 	 * 更新一本書的資訊
 	 * 
 	 * @param isbn
@@ -127,7 +138,7 @@ public class BookController {
 		book.setPublish(publish);
 		return bookService.updateBook(book);
 	}
-	
+
 	@PostMapping("/deleteBook")
 	public void deleteBook(@RequestParam String isbn) {
 		bookService.deleteBook(isbn);

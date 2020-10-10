@@ -15,5 +15,7 @@ public interface BookService {
 	void deleteBook(String isbn);
 
 	Book findBook(String isbn);
+	
+	List<Book> findByAuthor(String author);
 
 }
