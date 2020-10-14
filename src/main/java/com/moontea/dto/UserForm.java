@@ -11,17 +11,17 @@ import com.moontea.entity.User;
 
 public class UserForm {
 
-	@NotBlank
+	@NotBlank(message = "不能為空")
 	private String username;
 
 	@NotBlank
-	@Length(min = 6)
+	@Length(min = 6, message = "密碼長度至少需要6位")
 	private String password;
 
 //	@Pattern(regexp = "")
 	private int phone;
 
-	@Email
+//	@Email
 	private String email;
 
 	@NotBlank

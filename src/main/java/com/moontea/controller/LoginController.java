@@ -38,6 +38,7 @@ public class LoginController {
 
 	@PostMapping("/register")
 	public String register(@Valid UserForm userForm, BindingResult result) {
+
 		if (result.hasErrors()) {
 			List<FieldError> fieldErrors = result.getFieldErrors();
 			for (FieldError fieldError : fieldErrors) {
@@ -46,6 +47,12 @@ public class LoginController {
 			}
 			return "register";
 		}
+
+		if (!userForm.getPassword().equals(userForm.getConfirmPassword())) {
+			logger.info("password confirm failed");
+			return "register";
+		}
+
 		User user = userForm.convertToUser();
 		userRepository.save(user);
 		return "redirect:/login";
