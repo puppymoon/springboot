@@ -19,9 +19,11 @@ public class UserForm {
 	private String password;
 
 //	@Pattern(regexp = "")
-	private int phone;
+	@NotBlank
+	private String phone;
 
-//	@Email
+	@Email(message = "請輸入電子信箱")
+	@NotBlank
 	private String email;
 
 	@NotBlank
@@ -46,11 +48,11 @@ public class UserForm {
 		this.password = password;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

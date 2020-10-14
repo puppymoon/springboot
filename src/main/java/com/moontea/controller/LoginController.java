@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,8 @@ public class LoginController {
 	private UserRepository userRepository;
 
 	@GetMapping("/register")
-	public String registerPage() {
+	public String registerPage(Model model) {
+		model.addAttribute("userForm", new UserForm());
 		return "register";
 	}
 
@@ -39,17 +41,17 @@ public class LoginController {
 	@PostMapping("/register")
 	public String register(@Valid UserForm userForm, BindingResult result) {
 
+		if (!userForm.getPassword().equals(userForm.getConfirmPassword())) {
+			logger.info("password confirm failed");
+			result.rejectValue("confirmPassword", "confirmError", "密碼不一樣");
+		}
+
 		if (result.hasErrors()) {
 			List<FieldError> fieldErrors = result.getFieldErrors();
 			for (FieldError fieldError : fieldErrors) {
 				logger.info(
 						fieldError.getField() + " : " + fieldError.getDefaultMessage() + " : " + fieldError.getCode());
 			}
-			return "register";
-		}
-
-		if (!userForm.getPassword().equals(userForm.getConfirmPassword())) {
-			logger.info("password confirm failed");
 			return "register";
 		}
 
