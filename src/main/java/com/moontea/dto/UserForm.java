@@ -1,15 +1,30 @@
 package com.moontea.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.BeanUtils;
 
 import com.moontea.entity.User;
 
 public class UserForm {
 
+	@NotBlank
 	private String username;
+
+	@NotBlank
+	@Length(min = 6)
 	private String password;
+
+//	@Pattern(regexp = "")
 	private int phone;
+
+	@Email
 	private String email;
+
+	@NotBlank
 	private String confirmPassword;
 
 	public UserForm() {

@@ -1,7 +1,16 @@
 package com.moontea.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.executable.ValidateOnExecution;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -12,26 +21,34 @@ import com.moontea.repo.UserRepository;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private UserRepository userRepository;
+	Logger logger = LoggerFactory.getLogger(getClass());
 
-    @GetMapping("/register")
-    public String registerPage() {
-        return "register";
-    }
+	@Autowired
+	private UserRepository userRepository;
 
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login";
-    }
+	@GetMapping("/register")
+	public String registerPage() {
+		return "register";
+	}
 
+	@GetMapping("/login")
+	public String loginPage() {
+		return "login";
+	}
 
-    @PostMapping("/register")
-    public String register(UserForm userForm) {
-        User user = userForm.convertToUser();
-        userRepository.save(user);
-        return "redirect:/login";
-    }
-
+	@PostMapping("/register")
+	public String register(@Valid UserForm userForm, BindingResult result) {
+		if (result.hasErrors()) {
+			List<FieldError> fieldErrors = result.getFieldErrors();
+			for (FieldError fieldError : fieldErrors) {
+				logger.info(
+						fieldError.getField() + " : " + fieldError.getDefaultMessage() + " : " + fieldError.getCode());
+			}
+			return "register";
+		}
+		User user = userForm.convertToUser();
+		userRepository.save(user);
+		return "redirect:/login";
+	}
 
 }
