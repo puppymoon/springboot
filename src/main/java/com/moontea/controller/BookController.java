@@ -103,7 +103,7 @@ public class BookController {
 	 * @param isbn
 	 * @return
 	 */
-	@PostMapping("/findBook")
+	@GetMapping("/findBook")
 	public Book findBook(@RequestParam String isbn) {
 		return bookService.findBook(isbn);
 	}

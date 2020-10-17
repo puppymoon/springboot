@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.moontea.entity.Book;
+import com.moontea.exception.BookNotFoundException;
 import com.moontea.repo.BookRepository;
 import com.moontea.service.BookService;
 
@@ -30,12 +31,12 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public Book findBook(String isbn) {
-		Book book = null;
+
 		Optional<Book> opBook = bookRepository.findById(isbn);
-		if (opBook.isPresent()) {
-			book = opBook.get();
+		if (!opBook.isPresent()) {
+			throw new BookNotFoundException("查無此書資訊");
 		}
-		return book;
+		return opBook.get();
 	}
 
 	@Override

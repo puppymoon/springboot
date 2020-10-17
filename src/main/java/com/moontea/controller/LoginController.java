@@ -22,7 +22,7 @@ import com.moontea.repo.UserRepository;
 @Controller
 public class LoginController {
 
-	Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	private UserRepository userRepository;
@@ -59,7 +59,7 @@ public class LoginController {
 		userRepository.save(user);
 		return "redirect:/login";
 	}
-	
+
 	@GetMapping("/exception")
 	public void test500Page() {
 		throw new RuntimeException();
