@@ -2,6 +2,8 @@ package com.moontea.service.impl;
 
 import java.util.Date;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,19 +18,24 @@ public class AuthorServiceImpl implements AuthorService {
 	@Autowired
 	private AuthorRepository authorRepostiory;
 
-	@Transactional
 	@Override
-	public Author updateAuthor() {
-		Author author = new Author();
-		author.setPhone("9999999999");
-		author.setNickName("自由自在1");
-		author.setSignDate(new Date());
-		Author author1 = authorRepostiory.save(author);
-
-		author1.setPhone("111111111");
-		Author author2 = authorRepostiory.save(author1);
-
-		int i = 8 / 0;
-		return author2;
+	public Author saveAuthor(Author author) {
+		return authorRepostiory.save(author);
 	}
+
+	@Override
+	public Author updateAuthor(Author author) {
+		return authorRepostiory.save(author);
+	}
+
+	@Override
+	public Author findAuthor(Long id) {
+		return authorRepostiory.findById(id).orElseThrow(() -> new EntityNotFoundException());
+	}
+
+	@Override
+	public void deleteAuthor(Long id) {
+		authorRepostiory.findById(id).orElseThrow(() -> new EntityNotFoundException());
+	}
+
 }
