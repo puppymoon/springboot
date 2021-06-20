@@ -3,12 +3,17 @@ spring:
     mode: HTML
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/moontea
-    username: root
-    password: 123456
+    url: jdbc:mysql://db4free.net:3306/moontea
+    username: moontea
+    password: moontea306
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: create
+    show-sql: false
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+      hibernate:
+        ejb:
+          interceptor: com.moontea.interceptor.CustomInterceptor
   profiles:
     active: dev
