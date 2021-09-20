@@ -2,12 +2,11 @@ package com.moontea.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+
+import com.moontea.entity.User;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.BeanUtils;
-
-import com.moontea.entity.User;
 
 public class UserForm {
 
